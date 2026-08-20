@@ -4,12 +4,12 @@ version: 0.1.0
 quarto-required: ">=1.4.0"
 contributes:
   formats:
-    common:
+    haskoli-islands-html:
+      extends: html
       lang: en
       date-format: long
       citations-hover: true
       footnotes-hover: true
-    html:
       theme:
         - cosmo
         - html.scss
@@ -19,7 +19,12 @@ contributes:
       link-external-icon: true
       smooth-scroll: true
       anchor-sections: true
-    revealjs:
+    haskoli-islands-revealjs:
+      extends: revealjs
+      lang: en
+      date-format: long
+      citations-hover: true
+      footnotes-hover: true
       theme:
         - simple
         - revealjs.scss

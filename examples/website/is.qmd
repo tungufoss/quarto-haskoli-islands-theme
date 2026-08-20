@@ -1,5 +1,6 @@
 ---
 title: "Íslenskt Dæmi"
+lang: is
 ---
 
 Þessi síða notar tilbúið efni til að sýna grunnútlit Quarto-vefs. Hún inniheldur

@@ -1,0 +1,30 @@
+title: Háskóli Íslands Theme
+author: tungufoss
+version: 0.1.0
+quarto-required: ">=1.4.0"
+contributes:
+  formats:
+    common:
+      lang: en
+      date-format: long
+      citations-hover: true
+      footnotes-hover: true
+    html:
+      theme:
+        - cosmo
+        - html.scss
+      toc: true
+      toc-location: right
+      code-overflow: wrap
+      link-external-icon: true
+      smooth-scroll: true
+      anchor-sections: true
+    revealjs:
+      theme:
+        - simple
+        - revealjs.scss
+      slide-number: true
+      controls: true
+      progress: true
+      transition: fade
+      code-overflow: wrap

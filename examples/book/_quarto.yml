@@ -1,0 +1,14 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Háskóli Íslands Book Demo"
+  author: "Example Author"
+  date: today
+  chapters:
+    - index.qmd
+    - chapter-1.qmd
+
+format:
+  haskoli-islands-html: default

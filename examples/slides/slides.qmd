@@ -1,0 +1,35 @@
+---
+title: "Háskóli Íslands Slides"
+subtitle: "Synthetic RevealJS example"
+author: "Example Presenter"
+date: today
+format:
+  haskoli-islands-revealjs: default
+---
+
+## Public Design Source
+
+This slide example is based on the public Háskóli Íslands design standard,
+HÖNNUNARSTAÐALL HÍ: <https://honnun.hi.is/>.
+
+It is not an official Háskóli Íslands presentation template.
+
+## English Example
+
+::: {.hi-highlight}
+Use short, public-safe content when demonstrating reusable institutional
+styling.
+:::
+
+## Íslenskt Dæmi
+
+- Tilbúið dæmi
+- Almenn framsetning
+- Engin persónugögn
+
+## Small Metric
+
+::: {.hi-kpi}
+**3**
+Initial Quarto surfaces: website HTML, book HTML, and RevealJS slides.
+:::

@@ -1,0 +1,41 @@
+/*-- scss:defaults --*/
+$body-bg: #ffffff;
+$body-color: #15191d;
+$link-color: #005aa0;
+$presentation-heading-color: #003b70;
+$presentation-heading-font: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$main-font: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$code-block-font-size: 0.75em;
+
+/*-- scss:rules --*/
+@import "theme/tokens";
+@import "theme/rules";
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal h1,
+.reveal h2 {
+  border-bottom: 0.08em solid $hi-red;
+  padding-bottom: 0.18em;
+}
+
+.reveal .title {
+  border-bottom: 0;
+}
+
+.reveal .slide-number {
+  color: $hi-dark-blue;
+}
+
+.reveal .progress span {
+  background: $hi-red;
+}
+
+.reveal blockquote {
+  border-left: 0.25em solid $hi-blue;
+  box-shadow: none;
+  color: $hi-ink;
+  padding-left: 1em;
+}

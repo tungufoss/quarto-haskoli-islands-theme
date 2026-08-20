@@ -1,0 +1,17 @@
+# Synthetic Chapter
+
+::: {.hi-lead}
+This chapter contains only fictional, public-safe demonstration text.
+:::
+
+## Íslenskt Efni
+
+Hér er stutt tilbúið dæmi um kafla í Quarto-bók. Markmiðið er að prófa letur,
+liti, efnisyfirlit og almenna framsetningu.
+
+## Callout
+
+::: {.callout-note}
+The initial book entry point uses the shared HTML theme. More book-specific
+layout refinements are planned after the skeleton is reviewed.
+:::

@@ -9,9 +9,9 @@ only Quarto extension code, styling, examples, and release metadata.
 
 ## Status
 
-Early project setup. The repository currently documents the intended scope and
-public contribution rules before the first packaged Quarto extension release.
-Expect the extension layout, example projects, and rendered examples to evolve.
+Initial Quarto extension skeleton. The repository includes a reusable format
+extension, shared SCSS tokens, HTML and RevealJS entry points, and public-safe
+examples for websites, books, and slides.
 
 ## Design Source
 
@@ -32,14 +32,31 @@ endorsement, ownership, or approval.
 - Synthetic, public-safe examples in Icelandic and English.
 - Documentation for installation, rendering, contribution, and release workflow.
 
-## Planned Formats
+## Extension Layout
 
-- `website`: navigation, typography, colours, callouts, listings, and page
-  layouts suitable for Quarto websites.
-- `book`: chapter structure, title pages, cross-references, callouts, and
-  printable/export-friendly defaults.
-- `revealjs`: slide typography, section dividers, title slides, colour
-  treatments, and common presentation components.
+```text
+_extensions/haskoli-islands/
+  _extension.yml
+  html.scss
+  revealjs.scss
+  theme/
+    _tokens.scss
+    _rules.scss
+```
+
+The shared token and rule files provide the first reusable styling layer. The
+HTML entry point is used by standalone documents, websites, and books. The
+RevealJS entry point provides slide-specific defaults while reusing the same
+tokens.
+
+## Supported Entry Points
+
+- `haskoli-islands-html`: initial HTML theme for standalone documents, Quarto
+  websites, and Quarto books.
+- `haskoli-islands-revealjs`: initial RevealJS slide theme.
+
+Book-specific title-page and chapter-opening refinements are planned; the
+current book example renders through the shared HTML theme.
 
 ## Non-Goals
 
@@ -60,16 +77,46 @@ content.
 
 ## Installation
 
-No released Quarto extension package is published yet. Once the extension files
-are added, installation will follow the standard Quarto extension workflow, for
-example:
+Install the extension into an existing Quarto project with:
 
 ```bash
 quarto add tungufoss/quarto-haskoli-islands-theme
 ```
 
-Until then, clone the repository to review the documentation and proposed
-project boundaries.
+Then use one of the contributed formats:
+
+```yaml
+format:
+  haskoli-islands-html: default
+```
+
+or:
+
+```yaml
+format:
+  haskoli-islands-revealjs: default
+```
+
+To start from the included document template, use:
+
+```bash
+quarto use template tungufoss/quarto-haskoli-islands-theme
+```
+
+## Examples
+
+The examples contain only synthetic, public-safe Icelandic and English content.
+Render them from the repository root:
+
+```bash
+quarto render template.qmd
+quarto render examples/website
+quarto render examples/book
+quarto render examples/slides/slides.qmd
+```
+
+Nested examples include a local copy of the extension so each example project can
+render directly during development.
 
 ## License
 

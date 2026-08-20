@@ -1,0 +1,29 @@
+---
+title: "Website Example"
+---
+
+This public-safe website example demonstrates the initial HTML styling for a
+Quarto website.
+
+The visual direction is based on the public Háskóli Íslands design standard,
+HÖNNUNARSTAÐALL HÍ: <https://honnun.hi.is/>. This repository is not presented as
+an official Háskóli Íslands product.
+
+## Components
+
+::: {.hi-lead}
+Lead text can introduce a page while keeping the layout simple and reusable.
+:::
+
+::: {.hi-highlight}
+Highlighted content can point readers to a public event, course description, or
+general institutional information.
+:::
+
+## Synthetic Table
+
+| Area | Initial support |
+|---|---|
+| Website | Rendered example |
+| Book | Rendered example |
+| Slides | Rendered example |

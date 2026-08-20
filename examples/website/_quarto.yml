@@ -1,0 +1,18 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Háskóli Íslands Theme Demo"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: is.qmd
+        text: Íslenska
+  page-footer:
+    left: "Synthetic example content for a public Quarto theme."
+    right: "Design source: https://honnun.hi.is/"
+
+format:
+  haskoli-islands-html: default

@@ -1,0 +1,27 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$headings-font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$body-color: #15191d;
+$link-color: #005aa0;
+$navbar-bg: #ffffff;
+$navbar-fg: #003b70;
+$navbar-hl: #c43c35;
+$toc-color: #005aa0;
+$code-color: #003b70;
+
+/*-- scss:rules --*/
+@import "theme/tokens";
+@import "theme/rules";
+
+.quarto-title-meta {
+  color: $hi-muted;
+}
+
+.sidebar nav[role="doc-toc"] ul > li > a.active {
+  border-left-color: $hi-red;
+  color: $hi-dark-blue !important;
+}
+
+table caption {
+  color: $hi-muted;
+}

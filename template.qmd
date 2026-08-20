@@ -1,0 +1,39 @@
+---
+title: "Háskóli Íslands Theme Example"
+subtitle: "Reusable Quarto HTML starter"
+author: "Example Author"
+date: today
+format:
+  haskoli-islands-html: default
+---
+
+This synthetic example demonstrates the initial HTML format supplied by the
+extension. It is based on the public Háskóli Íslands design standard,
+HÖNNUNARSTAÐALL HÍ: <https://honnun.hi.is/>.
+
+This community-maintained theme skeleton does not imply official endorsement by
+Háskóli Íslands.
+
+## English Example
+
+::: {.hi-lead}
+This paragraph uses a small utility class for lead text on public-safe pages.
+:::
+
+::: {.hi-highlight}
+Use highlighted blocks for short notices, calls for participation, or links to
+public information.
+:::
+
+## Íslenskt Dæmi
+
+Þetta er tilbúið dæmi um almennan veftexta fyrir Quarto-síðu. Efnið inniheldur
+engin persónugögn, námsferla eða rannsóknargögn.
+
+| Section | Status |
+|---|---|
+| Website theme | Initial |
+| Book styling | Planned |
+| RevealJS slides | Initial |
+
+: Synthetic status table

@@ -1,0 +1,12 @@
+---
+title: "Íslenskt Dæmi"
+lang: is
+---
+
+Þessi síða notar tilbúið efni til að sýna grunnútlit Quarto-vefs. Hún inniheldur
+engin persónugögn, námsferla eða rannsóknargögn.
+
+::: {.hi-highlight}
+HÖNNUNARSTAÐALL HÍ er opinber uppspretta hönnunarstefnu:
+<https://honnun.hi.is/>.
+:::

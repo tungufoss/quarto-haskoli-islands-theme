@@ -1,0 +1,11 @@
+---
+title: "Book Example"
+---
+
+This synthetic book example checks that the HTML theme can be used inside a
+Quarto book project.
+
+The visual direction is based on HÖNNUNARSTAÐALL HÍ, the public Háskóli Íslands
+design standard: <https://honnun.hi.is/>.
+
+This is a community-maintained skeleton and does not imply official endorsement.

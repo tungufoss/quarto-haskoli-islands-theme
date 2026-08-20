@@ -1,0 +1,7 @@
+/.quarto/
+/template.html
+/template_files/
+/examples/website/_site/
+/examples/book/_book/
+/examples/slides/slides.html
+/examples/slides/slides_files/

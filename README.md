@@ -138,7 +138,7 @@ HÍ logos and photos are not bundled (see Design Source). Point `watermark`,
 | Title slide | `{{< hi-title >}}` as the first slide, built from the YAML above |
 | Contact card | `{{< contact-card >}}` lists every presenter, with one shared institution line (`affiliation`, default Háskóli Íslands / University of Iceland, plus `office`, e.g. "VR-II"). Usually on a `## Questions? {.focus-slide}` slide in a `.two-col` layout with a `.contact-photo` image |
 | Break with countdown | `{{< pause 300 >}}` (seconds; rings a bell at zero) |
-| Mentimeter | Set `menti_url`, `menti_code`, `menti_qr` in YAML, then `## {.focus-slide .menti-login intro="Scan to join"}` for the join slide and `## {data-menti="true"}` for an embedded question |
+| Mentimeter | Set `menti: {url, code, qr, display-url}` (or the flat `menti_url`, `menti_code`, `menti_qr` keys) in YAML, then `## {.focus-slide .menti-login intro="Scan to join"}` for the join slide and `## {data-menti="true"}` for an embedded question |
 | Icon cards | `::: {.fa-card cols=2}` with lines `- icon | **Title** | text` |
 | Layouts and text | `.two-col`, `.img-split`, `.steps`, `.statement`, `.lead`, `.kicker`, `.slide-subtitle`, `.lean-in` and more; see `_extensions/haskoli-islands/revealjs.scss` |
 | Teal slide | `{.focus-slide}` on any slide heading |

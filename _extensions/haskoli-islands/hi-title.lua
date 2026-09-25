@@ -75,7 +75,7 @@ local function presenter_html(meta, presenter)
     local safe_github = html_escape(github:gsub("^@", ""))
     table.insert(
       links,
-      '<a class="title-meta-icon" href="https://github.com/users/' .. safe_github .. '/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">' ..
+      '<a class="title-meta-icon" href="https://github.com/' .. safe_github .. '" target="_blank" rel="noopener noreferrer" aria-label="GitHub">' ..
       '<i class="fa-brands fa-github" aria-hidden="true"></i></a>'
     )
   end

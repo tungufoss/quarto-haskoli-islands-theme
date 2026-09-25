@@ -1,21 +1,19 @@
 // RevealJS theme for haskoli-islands-revealjs.
 // Ported unchanged from tungufoss/quarto-hi (styles/hi.scss + watermark.css),
-// the look used by the CDIO 2026 decks. Palette values match theme/_tokens.scss.
+// the look used by the CDIO 2026 decks. The palette comes from theme/_tokens.scss.
 
 /*-- scss:defaults --*/
 
 // ── HI Palette (honnun.hi.is) ─────────────────────────────────────────────────
-$hi-blue:    #10099F;
-$hi-teal:    #2DD2C0;
-$hi-green:   #00FFBA;
-$hi-yellow:  #FAC55B;
-$hi-orange:  #FFA05F;
-$hi-red:     #FC8484;
-$hi-pink:    #d61f69;
-$hi-paper:   #F5F5F5;
-$hi-panel:   #EEEEEE;
-$hi-ink:     #262626;
-$hi-white:   #ffffff;
+// Shared with the HTML format via theme/_tokens.scss; the names below are the
+// aliases the slide rules use.
+@import "theme/tokens";
+
+$hi-teal:    $hi-turquoise;
+$hi-red:     $hi-coral;
+$hi-paper:   $hi-surface;
+$hi-pink:    #d61f69;   // slides only
+$hi-panel:   #EEEEEE;   // slides only
 
 // ── Derived (Sass only — not exposed as CSS vars) ─────────────────────────────
 $hi-blue-dark:  darken($hi-blue, 8%);

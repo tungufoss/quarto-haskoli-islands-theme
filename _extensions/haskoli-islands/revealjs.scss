@@ -469,7 +469,9 @@ em.emph {
 .reveal .slides section.slide.img-split {
   display: grid !important;
   grid-template-columns: minmax(0, var(--img-split-text-width)) minmax(0, var(--img-split-image-width));
-  grid-template-rows: 1fr;
+  // minmax(0, …): a plain 1fr row grows to the image's natural height and
+  // pushes the caption out of the slide
+  grid-template-rows: minmax(0, 1fr);
   padding: 0 !important;
   gap: 0;
   height: calc(100% - var(--footer-height));
@@ -495,7 +497,7 @@ em.emph {
   .slide-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   figure {
-    width: 100%; height: 100%;
+    width: 100%; height: 100%; min-height: 0;
     margin: 0; padding: 0 0 12px;
     box-sizing: border-box;
     display: flex; flex-direction: column;

@@ -1011,6 +1011,18 @@ em.emph {
   }
 }
 
+// Several presenters: one block each, separated by a thin rule
+.contact-card-person {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65em;
+}
+
+.contact-card-person + .contact-card-person {
+  border-top: 1px solid var(--panel);
+  padding-top: 0.65em;
+}
+
 .contact-photo { width: 100%; max-height: 420px; object-fit: cover; object-position: top; }
 
 // lean-in on focus/teal slides needs a white bg to stay readable

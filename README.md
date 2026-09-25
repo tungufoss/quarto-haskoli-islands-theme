@@ -136,7 +136,7 @@ HÍ logos and photos are not bundled (see Design Source). Point `watermark`,
 | Feature | Usage |
 |---|---|
 | Title slide | `{{< hi-title >}}` as the first slide, built from the YAML above |
-| Contact card | `{{< contact-card >}}` (first presenter), usually on a `## Questions? {.focus-slide}` slide in a `.two-col` layout with a `.contact-photo` image |
+| Contact card | `{{< contact-card >}}` lists every presenter, with one shared institution line (`affiliation`, default Háskóli Íslands / University of Iceland, plus `office`, e.g. "VR-II"). Usually on a `## Questions? {.focus-slide}` slide in a `.two-col` layout with a `.contact-photo` image |
 | Break with countdown | `{{< pause 300 >}}` (seconds; rings a bell at zero) |
 | Mentimeter | Set `menti_url`, `menti_code`, `menti_qr` in YAML, then `## {.focus-slide .menti-login intro="Scan to join"}` for the join slide and `## {data-menti="true"}` for an embedded question |
 | Icon cards | `::: {.fa-card cols=2}` with lines `- icon | **Title** | text` |

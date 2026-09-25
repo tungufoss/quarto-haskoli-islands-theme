@@ -193,7 +193,12 @@ local function contact_card_html(meta)
   end
 
   local html = table.concat(blocks)
-  if shared then html = html .. place_row(places[1]) end
+  if shared then
+    -- Set off with a rule when several presenters share it, so it reads as common to all
+    local row = place_row(places[1])
+    if #presenters > 1 then row = '<div class="contact-card-shared">\n' .. row .. "</div>\n" end
+    html = html .. row
+  end
   return '<div class="contact-card">\n' .. html .. "</div>"
 end
 

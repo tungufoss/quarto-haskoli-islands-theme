@@ -1020,7 +1020,8 @@ em.emph {
   gap: 0.65em;
 }
 
-.contact-card-person + .contact-card-person {
+.contact-card-person + .contact-card-person,
+.contact-card-shared {
   border-top: 1px solid var(--panel);
   padding-top: 0.65em;
 }

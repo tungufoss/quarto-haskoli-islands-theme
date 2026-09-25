@@ -11,9 +11,9 @@ official endorsement, ownership, or approval by Háskóli Íslands.
 
 - `haskoli-islands-html`: shared HTML theme for standalone documents, websites,
   and books.
-- `haskoli-islands-revealjs`: RevealJS slide theme using the same shared tokens,
-  with a generated title slide, `{{< hi-contact >}}` closing slide,
-  `{{< pause >}}` break countdown and Mentimeter slides.
+- `haskoli-islands-revealjs`: RevealJS slide theme with the quarto-hi / CDIO 2026
+  look, `{{< hi-title >}}`, `{{< contact-card >}}`, `{{< pause >}}`, Mentimeter
+  and icon-card components.
 
 ## Planned Refinements
 

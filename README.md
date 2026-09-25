@@ -104,41 +104,45 @@ quarto use template tungufoss/quarto-haskoli-islands-theme
 ```
 
 This installs the extension and copies `template.qmd`, a starter slide deck.
-Fill in the YAML and the title slide and closing slide build themselves:
+The slides use the look of the `quarto-hi` / CDIO 2026 decks: turquoise title
+and focus slides, grey content slides with a watermark, and a blue footer bar
+with the logo. The canvas is 1280×720.
 
 ```yaml
-title: "Presentation Title"
-subtitle: "Short subtitle"
-event: "Event name"
-date: today
-presenter:
-  name: "Jane Example"
-  position: "Assistant Professor"
-  department: "Faculty of Industrial Engineering"
-  email: "jane@example.com"
-  web: "https://example.com"
-  orcid: "0000-0000-0000-0000"
-  github: "example"
-format: haskoli-islands-revealjs
+pagetitle: "Presentation Title"
+title-theme: "Department / Course"
+subtitle-highlight: "Your Presentation Title"
+subtitle-position: below          # optional: title above the theme line
+presenters:
+  - name: "Your Name"
+    hi-username: "username"       # gives username@hi.is and the staff page link
+    orcid: "0000-0000-0000-0000"
+    github: "yourusername"
+event-meta: "Event Name"
+event-date: today
+watermark: img/hi/hi_logo.svg     # your own copy; embedded in the page
+favicon: img/hi/favicon.svg
+format:
+  haskoli-islands-revealjs:
+    logo: img/hi/hi_named_logo-en.svg
+    footer: "Event Name · Your Name · username@hi.is"
 ```
+
+HÍ logos and photos are not bundled (see Design Source). Point `watermark`,
+`favicon` and `logo` at your own copies.
 
 ### Slide Features
 
 | Feature | Usage |
 |---|---|
-| Title slide | Automatic from `title`, `subtitle`, `presenter`, `event`, `date`. Add a photo with `title-slide-attributes: {data-background-image: img/photo.jpg, data-background-size: cover}`. A `::: {.notes}` block before the first slide heading becomes the title slide's speaker notes. |
-| Several presenters | Use `presenters:` with a list of the same fields instead of `presenter:`. The title and contact slides show everyone. |
-| Closing slide with contact details | `{{< hi-contact >}}` (optional `title="Questions?"`, `background="img/photo.jpg"`) |
+| Title slide | `{{< hi-title >}}` as the first slide, built from the YAML above |
+| Contact card | `{{< contact-card >}}` (first presenter), usually on a `## Questions? {.focus-slide}` slide in a `.two-col` layout with a `.contact-photo` image |
 | Break with countdown | `{{< pause 300 >}}` (seconds; rings a bell at zero) |
-| Mentimeter | Set `menti: {url, code, qr}` in YAML, then `## {.menti-login intro="Scan to join"}` for the join slide and `## {menti="true"}` for an embedded question |
-| Logo in the side banner | `hi-logo: img/logo.svg` (not bundled; see Design Source) |
-| Icelandic labels | `lang: is` gives "Pása" and "Takk fyrir". Also set `date-format: "D. MMMM YYYY"`, since Quarto's `long` format renders Icelandic dates as "2026 M06 10". |
-| Footer | `footer: "..."` is shown small beside the banner and hidden on the title slide. |
-
-The flat `menti_url`, `menti_code` and `menti_qr` keys used by `quarto-hi` also work.
-
-Write `date` as an ISO date (`2026-06-24`) or `today`; free text such as
-"24th June 2026" renders as "Invalid Date".
+| Mentimeter | Set `menti_url`, `menti_code`, `menti_qr` in YAML, then `## {.focus-slide .menti-login intro="Scan to join"}` for the join slide and `## {data-menti="true"}` for an embedded question |
+| Icon cards | `::: {.fa-card cols=2}` with lines `- icon | **Title** | text` |
+| Layouts and text | `.two-col`, `.img-split`, `.steps`, `.statement`, `.lead`, `.kicker`, `.slide-subtitle`, `.lean-in` and more; see `_extensions/haskoli-islands/revealjs.scss` |
+| Teal slide | `{.focus-slide}` on any slide heading |
+| Icelandic | `lang: is` gives "Pása" and Icelandic dates for `event-date: today` |
 
 ## Updating Existing Projects
 

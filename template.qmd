@@ -1,70 +1,67 @@
 ---
-title: "Presentation Title"
-subtitle: "Short subtitle"
-event: "Event name"
-date: today
-presenter:
-  name: "Jane Example"
-  position: "Assistant Professor"
-  department: "Faculty of Industrial Engineering"
-  email: "jane@example.com"
-  web: "https://example.com"
-  orcid: "0000-0000-0000-0000"
-  github: "example"
-# title-slide-attributes:         # optional photo behind the title slide
-#   data-background-image: img/photo.jpg
-#   data-background-size: cover
-# hi-logo: img/logo.svg          # optional logo in the side banner
-# menti:                          # optional Mentimeter settings
-#   url: "https://www.menti.com/..."
-#   code: "1234 5678"
-#   qr: img/menti-qr.png
-format: haskoli-islands-revealjs
+pagetitle: "Presentation Title"
+lang: en
+title-theme: "Department / Course"
+subtitle-highlight: "Your Presentation Title"
+subtitle-position: below
+presenters:
+  - name: "Your Name"
+    hi-username: "username"
+    orcid: "0000-0000-0000-0000"
+    github: "yourusername"
+event-meta: "Event Name"
+event-date: today
+# HÍ brand files are not bundled; point these at your own copies:
+# watermark: img/hi/hi_logo.svg
+# favicon: img/hi/favicon.svg
+format:
+  haskoli-islands-revealjs:
+    # logo: img/hi/hi_named_logo-en.svg
+    footer: "Event Name · Your Name · username@hi.is"
 ---
 
-## Agenda
-
-- One idea per slide
-- Short lines
-- Let the slide carry the point
+{{< hi-title >}}
 
 ::: {.notes}
-Speaker notes go here. Press `S` to open the speaker view.
+- Introduce yourself
+- Overview of the talk
 :::
 
-# Section Divider
+## Slide with cards
 
-## Two Columns
-
-:::: {.columns}
-::: {.column width="50%"}
-- Left column
-- Use for comparisons
-:::
-::: {.column width="50%"}
-::: {.callout-note}
-Callouts work as in any Quarto deck.
-:::
-:::
-::::
-
-## Key Number
-
-::: {.big-number}
-42%
+::: {.fa-card cols=1}
+- lightbulb | **Key point** | supporting detail
+- chart-line | **Another point** | more detail
+- users | **Third point** | and so on
 :::
 
-Short explanation of what the number means.
+::: {.notes}
+- Notes go here as bullet cues
+:::
+
+---
+
+## Slide with two-column cards
+
+::: {.fa-card cols=2}
+- circle-check | **First** | left card content
+- circle-xmark | **Second** | right card content
+:::
+
+---
 
 {{< pause 300 >}}
 
-## After the Break
+---
 
-Break slides count down from the given number of seconds and ring a bell at zero.
+## Questions? {.focus-slide}
 
-<!-- Mentimeter: set `menti:` in the YAML, then use
-## {.menti-login intro="Scan the QR code to join"}
-## {menti="true"}
--->
+::: {.two-col}
+::: {}
+<!-- ![](img/photo.jpg){.contact-photo} -->
+:::
 
-{{< hi-contact >}}
+::: {}
+{{< contact-card >}}
+:::
+:::

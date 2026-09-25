@@ -1,7 +1,8 @@
--- Slide features for haskoli-islands-revealjs:
---   * side banner, optional logo and title-slide "HÍ" badge
---   * countdown script for {{< pause >}} break slides
---   * Mentimeter login and question slides
+-- Page-level extras for haskoli-islands-revealjs:
+--   * countdown script for {{< pause >}} slides
+--   * hides footer and logo inside the speaker-notes view
+--   * `watermark: img/hi/hi_logo.svg` and `favicon: img/hi/favicon.svg`
+--     (HÍ brand files are not bundled; each deck points to its own copy)
 
 local function str(v)
   if v == nil then return nil end
@@ -10,117 +11,57 @@ local function str(v)
   return s
 end
 
-local function escape(s)
-  return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"):gsub('"', "&quot;"))
+local function resolve(path)
+  if pandoc.path.is_absolute(path) then return path end
+  return pandoc.path.join({ pandoc.path.directory(quarto.doc.input_file), path })
 end
 
-local function has_class(el, cls)
-  for _, c in ipairs(el.classes) do
-    if c == cls then return true end
+-- Embed as a data URI so the image works wherever the HTML is written
+-- (e.g. an output-dir such as docs/)
+local function data_uri(path)
+  local f = io.open(resolve(path), "rb")
+  if not f then
+    quarto.log.warning("haskoli-islands: cannot read " .. path)
+    return nil
   end
-  return false
+  local bytes = f:read("a")
+  f:close()
+  local mime = path:match("%.svg$") and "image/svg+xml" or
+    (path:match("%.png$") and "image/png" or "image/jpeg")
+  return "data:" .. mime .. ";base64," .. quarto.base64.encode(bytes)
 end
 
--- Menti settings: `menti: {url, code, qr, display-url}`.
--- The flat keys `menti_url`, `menti_code`, ... from quarto-hi also work.
-local function menti_settings(meta)
-  local m = meta["menti"] or {}
-  local function get(key)
-    return str(m[key]) or str(meta["menti_" .. key:gsub("-", "_")])
-  end
-  return {
-    url = get("url"),
-    code = get("code") or "",
-    qr = get("qr"),
-    display = get("display-url") or "www.menti.com",
-  }
-end
-
-local function menti_login(h, menti)
-  local intro = h.attributes["intro"] or "Join on Menti"
-  h.attributes["intro"] = nil
-  local qr = menti.qr and
-    ('<img class="menti-qr" src="' .. escape(menti.qr) .. '" alt="Menti QR code">') or ""
-  return pandoc.Blocks {
-    h,
-    pandoc.RawBlock("html",
-      '<div class="menti-login-text">' ..
-      '<span class="menti-kicker">Menti</span>' ..
-      '<h2>' .. escape(intro) .. '</h2>' ..
-      '<div class="menti-url">' .. escape(menti.display) .. '</div>' ..
-      '<div class="menti-code">' .. escape(menti.code) .. '</div>' ..
-      '</div>' .. qr)
-  }
-end
-
-local function menti_question(h, menti)
-  h.attributes["menti"] = nil
-  if menti.url then
-    h.attributes["background-iframe"] = menti.url
-    h.attributes["background-interactive"] = "true"
-  end
-  local qr = menti.qr and
-    ('<img class="menti-panel-qr" src="' .. escape(menti.qr) .. '" alt="Menti QR code">') or ""
-  return pandoc.Blocks {
-    h,
-    pandoc.RawBlock("html",
-      '<div class="menti-panel">' .. qr ..
-      '<div class="menti-panel-url">' .. escape(menti.display) .. '</div>' ..
-      '<div class="menti-panel-code">' .. escape(menti.code) .. '</div>' ..
-      '</div>')
-  }
-end
-
--- `presenter:` (one person) and `presenters:` (a list) are both accepted;
--- the title slide template reads `presenters`.
-local function normalize_presenters(meta)
-  if meta["presenters"] == nil and meta["presenter"] ~= nil then
-    meta["presenters"] = pandoc.MetaList({ meta["presenter"] })
-  end
-end
-
--- A `::: {.notes}` block before the first slide heading would become an empty
--- slide; move it onto the generated title slide instead.
-local function move_title_notes(doc)
-  local blocks = doc.blocks
-  for i, block in ipairs(blocks) do
-    if block.t == "Header" then return end
-    if block.t == "Div" and block.classes:includes("notes") then
-      doc.meta["title-slide-notes"] = pandoc.MetaBlocks(block.content)
-      blocks:remove(i)
-      return
-    end
-  end
-end
-
-function Pandoc(doc)
+function Meta(meta)
   if not quarto.doc.is_format("revealjs") then return nil end
-  normalize_presenters(doc.meta)
-  move_title_notes(doc)
 
   quarto.doc.add_html_dependency({
-    name = "haskoli-islands-slides",
+    name = "haskoli-islands-countdown",
     version = "1.0.0",
-    scripts = { "hi-slides.js" },
+    scripts = { { path = "countdown.js", afterBody = true } },
   })
 
-  local logo = str(doc.meta["hi-logo"])
-  local logo_html = logo and
-    ('<img id="hi-logo" src="' .. escape(logo) .. '" alt="" aria-hidden="true">') or ""
-  quarto.doc.include_text("before-body",
-    '<div id="hi-banner" aria-hidden="true">' .. logo_html .. '</div>\n' ..
-    '<div id="hi-badge" aria-hidden="true">HÍ</div>')
+  quarto.doc.include_text("in-header", [[
+<script>
+// Hide footer/logo in the RevealJS speaker-notes receiver iframe
+if (window.location.search.includes('receiver') || window.location.hash.includes('receiver')) {
+  document.documentElement.classList.add('speaker-receiver');
+}
+</script>]])
 
-  local menti = menti_settings(doc.meta)
-  return doc:walk({
-    Header = function(h)
-      if has_class(h, "menti-login") then
-        return menti_login(h, menti)
-      end
-      if h.attributes["menti"] == "true" or h.attributes["data-menti"] == "true" then
-        h.attributes["data-menti"] = nil
-        return menti_question(h, menti)
-      end
+  local favicon = str(meta["favicon"])
+  if favicon then
+    quarto.doc.include_text("in-header",
+      '<link rel="icon" href="' .. favicon .. '"' ..
+      (favicon:match("%.svg$") and ' type="image/svg+xml"' or "") .. '>')
+  end
+
+  local watermark = str(meta["watermark"])
+  if watermark then
+    local uri = data_uri(watermark)
+    if uri then
+      quarto.doc.include_text("in-header",
+        '<style>.reveal .slide-background { --watermark-image: url("' .. uri ..
+        '"); --watermark-content: ""; }</style>')
     end
-  })
+  end
 end

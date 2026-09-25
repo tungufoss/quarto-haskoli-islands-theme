@@ -14,9 +14,9 @@ $hi-border: #E8E8E8 !default;
 $hi-surface: #F5F5F5 !default;
 $hi-white: #FFFFFF !default;
 
-// Accent used for rules, borders and progress bars. Override with a
-// department colour if needed (e.g. #0098AA for Health Sciences).
-$hi-accent: $hi-engineering !default;
+// Accent used for rules and highlights: turquoise, as on the title,
+// break and focus slides.
+$hi-accent: $hi-turquoise !default;
 
 $hi-font-family: "Jost", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
 $hi-heading-family: $hi-font-family !default;

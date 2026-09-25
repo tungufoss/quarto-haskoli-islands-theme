@@ -1,11 +1,18 @@
 ---
-title: "Háskóli Íslands Slides"
-subtitle: "Synthetic RevealJS example"
-author: "Example Presenter"
-date: today
+pagetitle: "Háskóli Íslands Slides"
+title-theme: "Synthetic RevealJS example"
+subtitle-highlight: "Háskóli Íslands Slides"
+subtitle-position: below
+presenters:
+  - name: "Example Presenter"
+event-meta: "Example Event"
+event-date: today
 format:
   haskoli-islands-revealjs: default
 ---
+
+{{< hi-title >}}
+
 
 ## Public Design Source
 

@@ -1,0 +1,26 @@
+<section id="$idprefix$title-slide" class="hi-title-slide"$if(title-slide-attributes)$$for(title-slide-attributes/pairs)$ $it.key$="$it.value$"$endfor$$else$ data-background-color="#10099F"$endif$>
+  <div class="title-highlight">$title$</div>
+$if(subtitle)$
+  <div class="subtitle-highlight">$subtitle$</div>
+$endif$
+$if(presenter.name)$
+  <div class="title-meta">
+    <strong>$presenter.name$</strong>
+$if(presenter.orcid)$
+    <a href="https://orcid.org/$presenter.orcid$" target="_blank" rel="noopener noreferrer" aria-label="ORCID"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a>
+$endif$
+$if(presenter.email)$
+    <a href="mailto:$presenter.email$"><i class="fa-solid fa-envelope" aria-hidden="true"></i> $presenter.email$</a>
+$endif$
+  </div>
+$else$
+$for(author)$
+  <div class="title-meta"><strong>$author$</strong></div>
+$endfor$
+$endif$
+$if(event)$
+  <div class="event-meta">$event$$if(date)$: $date$$endif$</div>
+$elseif(date)$
+  <div class="event-meta">$date$</div>
+$endif$
+</section>

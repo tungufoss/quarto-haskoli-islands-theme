@@ -1,39 +1,70 @@
 ---
-title: "Háskóli Íslands Theme Example"
-subtitle: "Reusable Quarto HTML starter"
-author: "Example Author"
+title: "Presentation Title"
+subtitle: "Short subtitle"
+event: "Event name"
 date: today
-format:
-  haskoli-islands-html: default
+presenter:
+  name: "Jane Example"
+  position: "Assistant Professor"
+  department: "Faculty of Industrial Engineering"
+  email: "jane@example.com"
+  web: "https://example.com"
+  orcid: "0000-0000-0000-0000"
+  github: "example"
+# title-slide-attributes:         # optional photo behind the title slide
+#   data-background-image: img/photo.jpg
+#   data-background-size: cover
+# hi-logo: img/logo.svg          # optional logo in the side banner
+# menti:                          # optional Mentimeter settings
+#   url: "https://www.menti.com/..."
+#   code: "1234 5678"
+#   qr: img/menti-qr.png
+format: haskoli-islands-revealjs
 ---
 
-This synthetic example demonstrates the initial HTML format supplied by the
-extension. It is based on the public Háskóli Íslands design standard,
-HÖNNUNARSTAÐALL HÍ: <https://honnun.hi.is/>.
+## Agenda
 
-This community-maintained theme skeleton does not imply official endorsement by
-Háskóli Íslands.
+- One idea per slide
+- Short lines
+- Let the slide carry the point
 
-## English Example
-
-::: {.hi-lead}
-This paragraph uses a small utility class for lead text on public-safe pages.
+::: {.notes}
+Speaker notes go here. Press `S` to open the speaker view.
 :::
 
-::: {.hi-highlight}
-Use highlighted blocks for short notices, calls for participation, or links to
-public information.
+# Section Divider
+
+## Two Columns
+
+:::: {.columns}
+::: {.column width="50%"}
+- Left column
+- Use for comparisons
+:::
+::: {.column width="50%"}
+::: {.callout-note}
+Callouts work as in any Quarto deck.
+:::
+:::
+::::
+
+## Key Number
+
+::: {.big-number}
+42%
 :::
 
-## Íslenskt Dæmi
+Short explanation of what the number means.
 
-Þetta er tilbúið dæmi um almennan veftexta fyrir Quarto-síðu. Efnið inniheldur
-engin persónugögn, námsferla eða rannsóknargögn.
+{{< pause 300 >}}
 
-| Section | Status |
-|---|---|
-| Website theme | Initial |
-| Book styling | Planned |
-| RevealJS slides | Initial |
+## After the Break
 
-: Synthetic status table
+Break slides count down from the given number of seconds and ring a bell at zero.
+
+<!-- Mentimeter: set `menti:` in the YAML, then use
+## {.menti-login intro="Scan the QR code to join"}
+## {menti="true"}
+-->
+
+{{< hi-contact >}}

@@ -97,11 +97,53 @@ format:
   haskoli-islands-revealjs: default
 ```
 
-To start from the included document template, use:
+## Start a New Presentation
 
 ```bash
 quarto use template tungufoss/quarto-haskoli-islands-theme
 ```
+
+This installs the extension and copies `template.qmd`, a starter slide deck.
+Fill in the YAML and the title slide and closing slide build themselves:
+
+```yaml
+title: "Presentation Title"
+subtitle: "Short subtitle"
+event: "Event name"
+date: today
+presenter:
+  name: "Jane Example"
+  position: "Assistant Professor"
+  department: "Faculty of Industrial Engineering"
+  email: "jane@example.com"
+  web: "https://example.com"
+  orcid: "0000-0000-0000-0000"
+  github: "example"
+format: haskoli-islands-revealjs
+```
+
+### Slide Features
+
+| Feature | Usage |
+|---|---|
+| Title slide | Automatic from `title`, `subtitle`, `presenter`, `event`, `date`. Add a photo with `title-slide-attributes: {data-background-image: img/photo.jpg, data-background-size: cover}`. |
+| Closing slide with contact details | `{{< hi-contact >}}` (optional `title="Questions?"`, `background="img/photo.jpg"`) |
+| Break with countdown | `{{< pause 300 >}}` (seconds; rings a bell at zero) |
+| Mentimeter | Set `menti: {url, code, qr}` in YAML, then `## {.menti-login intro="Scan to join"}` for the join slide and `## {menti="true"}` for an embedded question |
+| Logo in the side banner | `hi-logo: img/logo.svg` (not bundled; see Design Source) |
+| Icelandic labels | `lang: is` gives "Pása" and "Takk fyrir" |
+
+The flat `menti_url`, `menti_code` and `menti_qr` keys used by `quarto-hi` also work.
+
+## Updating Existing Projects
+
+```bash
+quarto update extension tungufoss/quarto-haskoli-islands-theme
+```
+
+Commit the updated `_extensions/` folder. Pages, books and slides all read the
+same palette and font from `theme/_tokens.scss`, so one update keeps every
+output in sync.
 
 ## Examples
 

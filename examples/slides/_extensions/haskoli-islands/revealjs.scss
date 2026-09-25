@@ -1,36 +1,133 @@
 /*-- scss:defaults --*/
+// Values mirror theme/_tokens.scss so HTML and slides share one look.
 $body-bg: #ffffff;
-$body-color: #15191d;
-$link-color: #005aa0;
-$presentation-heading-color: #003b70;
-$presentation-heading-font: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-$main-font: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-$code-block-font-size: 0.75em;
+$body-color: #262626;
+$link-color: #10099F;
+$font-family-sans-serif: "Jost", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$presentation-font-size-root: 34px;
+$dark-bg-link-color: #2DD2C0;
+$presentation-heading-font: "Jost", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$presentation-heading-color: #10099F;
+$presentation-heading-text-transform: none;
+$code-block-font-size: 0.78em;
 
 /*-- scss:rules --*/
 @import "theme/tokens";
 @import "theme/rules";
 
+:root {
+  --banner-w: 250px;
+}
+
+// Scale the side banner down in smaller viewports (e.g. presenter panes).
+@media (max-width: 1500px) {
+  :root { --banner-w: 170px; }
+}
+
+@media (max-width: 1100px) {
+  :root { --banner-w: 120px; }
+  .reveal .slide { padding: 32px 48px 32px calc(var(--banner-w) + 26px); }
+}
+
+@media (max-width: 800px) {
+  :root { --banner-w: 92px; }
+  .reveal .slide { padding: 24px 32px 24px calc(var(--banner-w) + 18px); }
+}
+
 .reveal .slides {
   text-align: left;
 }
 
+.reveal .slides > section,
+.reveal .slides > section > section {
+  box-sizing: border-box;
+}
+
+.reveal .slide {
+  padding: 42px 68px 42px calc(var(--banner-w) + 40px);
+}
+
+.reveal .progress { color: $hi-accent; }
+.reveal .controls { color: $hi-blue; }
+.reveal .slide-number { color: $hi-blue; }
+.reveal a:hover { color: $hi-accent; }
+
+// ── Branding overlay (injected by hi-branding.lua) ──────────────────
+
+#hi-banner {
+  align-items: flex-start;
+  background: $hi-accent;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: var(--banner-w);
+  z-index: 100;
+}
+
+#hi-logo {
+  display: block;
+  height: var(--banner-w);
+  object-fit: contain;
+  width: var(--banner-w);
+}
+
+// "HÍ" badge shown next to the banner on the title slide
+#hi-badge {
+  align-items: center;
+  background: $hi-blue;
+  color: $hi-white;
+  display: none;
+  font-family: $hi-font-family;
+  font-size: calc(var(--banner-w) * 0.62);
+  font-weight: 700;
+  height: var(--banner-w);
+  justify-content: center;
+  left: var(--banner-w);
+  letter-spacing: -0.02em;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: var(--banner-w);
+  z-index: 100;
+}
+
+// ── Typography ──────────────────────────────────────────────────────
+
 .reveal h1,
-.reveal h2 {
-  border-bottom: 0.08em solid $hi-red;
-  padding-bottom: 0.18em;
-}
-
-.reveal .title {
+.reveal h2,
+.reveal h3 {
   border-bottom: 0;
+  color: $hi-blue;
+  font-weight: 700;
+  line-height: 1.08;
+  padding-bottom: 0;
 }
 
-.reveal .slide-number {
-  color: $hi-dark-blue;
+.reveal h2 {
+  border-bottom: 4px solid $hi-accent;
+  width: fit-content;
+  margin-bottom: 0.6em;
+  padding-bottom: 0.1em;
 }
 
-.reveal .progress span {
-  background: $hi-red;
+.reveal p,
+.reveal li {
+  line-height: 1.3;
+}
+
+.reveal a,
+.reveal code {
+  color: $hi-blue;
+}
+
+.reveal pre code {
+  border-left: 6px solid $hi-accent;
+  max-height: 560px;
 }
 
 .reveal blockquote {
@@ -38,4 +135,253 @@ $code-block-font-size: 0.75em;
   box-shadow: none;
   color: $hi-ink;
   padding-left: 1em;
+}
+
+// ── Slide types ─────────────────────────────────────────────────────
+
+// Title slide (title-slide.html): background from title-slide-attributes,
+// text boxes offset past the banner
+.reveal .hi-title-slide {
+  padding: 0;
+}
+
+.title-highlight,
+.subtitle-highlight,
+.title-meta,
+.event-meta {
+  display: table;
+  margin-left: calc(var(--banner-w) + 40px);
+}
+
+.title-highlight {
+  background: rgba(255, 255, 255, 0.92);
+  color: $hi-blue;
+  font-size: 2.2em;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 1.4em;
+  padding: 0.08em 0.3em;
+}
+
+.subtitle-highlight {
+  background: rgba(255, 255, 255, 0.86);
+  color: $hi-ink;
+  font-size: 1.1em;
+  margin-top: 0.3em;
+  padding: 0.1em 0.3em;
+}
+
+.title-meta,
+.event-meta {
+  background: rgba(255, 255, 255, 0.86);
+  color: $hi-ink;
+  font-size: 0.72em;
+  margin-top: 0.45em;
+  padding: 0.4em 0.7em;
+}
+
+.reveal section .title-meta a {
+  color: $hi-blue;
+  margin-right: 0.8em;
+  text-decoration: none;
+}
+
+.title-meta strong {
+  margin-right: 0.4em;
+}
+
+.title-meta a i {
+  margin-right: 0.2em;
+}
+
+.dark-slide,
+.dark-slide :is(p, li, blockquote, a, code, strong, h1, h2, h3, .big-number) {
+  color: $hi-white;
+}
+
+.dark-slide h2 {
+  border-bottom-color: $hi-white;
+}
+
+// ── Components ──────────────────────────────────────────────────────
+
+.reveal .callout {
+  background: $hi-surface;
+  border-left: 8px solid $hi-accent;
+  font-size: 0.9em;
+  margin: 0.9em 0;
+  padding: 0.7em 0.9em;
+}
+
+.big-number {
+  color: $hi-blue;
+  font-size: 3.3em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.figure-placeholder {
+  align-items: center;
+  background: $hi-surface;
+  border: 2px dashed $hi-accent;
+  display: flex;
+  font-weight: 600;
+  justify-content: center;
+  min-height: 360px;
+}
+
+// ── Contact slide ({{< hi-contact >}}) ──────────────────────────────
+
+.contact-card {
+  border-left: 8px solid $hi-accent;
+  margin-top: 0.8em;
+  padding: 0.2em 0 0.2em 0.9em;
+}
+
+.contact-name {
+  color: $hi-blue;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+.contact-role {
+  color: $hi-muted;
+  font-size: 0.8em;
+  margin-bottom: 0.6em;
+}
+
+.contact-row {
+  font-size: 0.85em;
+  line-height: 1.6;
+
+  a { text-decoration: none; }
+  i { color: $hi-accent; margin-right: 0.3em; }
+}
+
+// ── Break slide ({{< pause seconds >}}) ─────────────────────────────
+
+.reveal .countdown-break {
+  --countdown-progress: 100%;
+
+  h1 { color: $hi-blue; font-size: 2.4em; margin-bottom: 0.3em; }
+}
+
+.countdown-clock {
+  background: $hi-blue;
+  box-shadow: 18px 18px 0 $hi-yellow;
+  color: $hi-white;
+  display: inline-block;
+  font-size: 154px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 0.95;
+  min-width: 430px;
+  padding: 22px 34px 30px;
+  position: relative;
+  text-align: center;
+
+  &::after {
+    background: $hi-accent;
+    bottom: -16px;
+    content: "";
+    height: 10px;
+    left: 0;
+    position: absolute;
+    transition: width 0.25s linear;
+    width: var(--countdown-progress);
+  }
+}
+
+.countdown-finished .countdown-clock {
+  background: $hi-yellow;
+  box-shadow: 18px 18px 0 $hi-accent;
+  color: $hi-blue;
+
+  &::after { width: 0; }
+}
+
+// ── Menti ───────────────────────────────────────────────────────────
+
+.reveal .menti-login {
+  align-items: center;
+  display: grid !important;
+  gap: 52px;
+  grid-template-columns: 1fr 390px;
+
+  > h2:empty { display: none; }
+  h2 { font-size: 1.8em; text-transform: uppercase; }
+}
+
+.menti-kicker {
+  color: $hi-accent;
+  font-size: 0.5em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.menti-url {
+  color: $hi-blue;
+  font-size: 38px;
+  font-weight: 700;
+  margin: 38px 0 8px;
+}
+
+.menti-code {
+  background: $hi-blue;
+  color: $hi-white;
+  display: inline-block;
+  font-size: 58px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 18px 26px;
+}
+
+.menti-qr {
+  background: $hi-white;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.22);
+  height: 390px;
+  object-fit: contain;
+  padding: 22px;
+  width: 390px;
+}
+
+// Panel beside an embedded Menti question
+.menti-panel {
+  align-items: center;
+  background: $hi-white;
+  border: 3px solid $hi-blue;
+  box-shadow: 8px 8px 0 $hi-yellow;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  left: 24px;
+  padding: 24px;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 260px;
+  z-index: 10;
+}
+
+.menti-panel-qr {
+  display: block;
+  height: 120px;
+  object-fit: contain;
+  width: 120px;
+}
+
+.menti-panel-url {
+  color: $hi-muted;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.menti-panel-code {
+  color: $hi-blue;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
 }

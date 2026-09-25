@@ -1,13 +1,22 @@
-$hi-blue: #005aa0 !default;
-$hi-dark-blue: #003b70 !default;
-$hi-red: #c43c35 !default;
-$hi-yellow: #f2c84b !default;
-$hi-green: #2f7d59 !default;
-$hi-ink: #15191d !default;
-$hi-muted: #5d6872 !default;
-$hi-border: #d8dee4 !default;
-$hi-surface: #f6f8fa !default;
-$hi-white: #ffffff !default;
+// HI palette from the public design standard (https://honnun.hi.is/).
+// Shared by the HTML and RevealJS formats so pages, books and slides match.
+$hi-blue: #10099F !default;
+$hi-dark-blue: #0A0668 !default; // darker shade of $hi-blue for hover states
+$hi-turquoise: #2DD2C0 !default;
+$hi-green: #00FFBA !default;
+$hi-yellow: #FAC55B !default;
+$hi-coral: #FC8484 !default;
+$hi-orange: #FFA05F !default;
+$hi-engineering: #EB7125 !default;
+$hi-ink: #262626 !default;
+$hi-muted: #5D6872 !default;
+$hi-border: #E8E8E8 !default;
+$hi-surface: #F5F5F5 !default;
+$hi-white: #FFFFFF !default;
 
-$hi-font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
-$hi-heading-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+// Accent used for rules, borders and progress bars. Override with a
+// department colour if needed (e.g. #0098AA for Health Sciences).
+$hi-accent: $hi-engineering !default;
+
+$hi-font-family: "Jost", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$hi-heading-family: $hi-font-family !default;

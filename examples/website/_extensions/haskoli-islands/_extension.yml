@@ -1,15 +1,21 @@
 title: Háskóli Íslands Theme
 author: tungufoss
-version: 0.1.0
+version: 0.2.0
 quarto-required: ">=1.4.0"
 contributes:
   formats:
-    haskoli-islands-html:
-      extends: html
+    common:
       lang: en
       date-format: long
       citations-hover: true
       footnotes-hover: true
+      include-in-header:
+        - text: |
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600;700&display=swap">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    html:
       theme:
         - cosmo
         - html.scss
@@ -19,17 +25,23 @@ contributes:
       link-external-icon: true
       smooth-scroll: true
       anchor-sections: true
-    haskoli-islands-revealjs:
-      extends: revealjs
-      lang: en
-      date-format: long
-      citations-hover: true
-      footnotes-hover: true
+    revealjs:
       theme:
         - simple
         - revealjs.scss
+      width: 1600
+      height: 900
+      center: false
+      template-partials:
+        - title-slide.html
       slide-number: true
+      show-slide-number: all
       controls: true
       progress: true
       transition: fade
+      background-transition: fade
       code-overflow: wrap
+      filters:
+        - hi-slides.lua
+      shortcodes:
+        - hi-shortcodes.lua

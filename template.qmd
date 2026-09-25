@@ -1,39 +1,67 @@
 ---
-title: "Háskóli Íslands Theme Example"
-subtitle: "Reusable Quarto HTML starter"
-author: "Example Author"
-date: today
+pagetitle: "Presentation Title"
+lang: en
+title-theme: "Department / Course"
+subtitle-highlight: "Your Presentation Title"
+subtitle-position: below
+presenters:
+  - name: "Your Name"
+    hi-username: "username"
+    orcid: "0000-0000-0000-0000"
+    github: "yourusername"
+event-meta: "Event Name"
+event-date: today
+# HÍ brand files are not bundled; point these at your own copies:
+# watermark: img/hi/hi_logo.svg
+# favicon: img/hi/favicon.svg
 format:
-  haskoli-islands-html: default
+  haskoli-islands-revealjs:
+    # logo: img/hi/hi_named_logo-en.svg
+    footer: "Event Name · Your Name · username@hi.is"
 ---
 
-This synthetic example demonstrates the initial HTML format supplied by the
-extension. It is based on the public Háskóli Íslands design standard,
-HÖNNUNARSTAÐALL HÍ: <https://honnun.hi.is/>.
+{{< hi-title >}}
 
-This community-maintained theme skeleton does not imply official endorsement by
-Háskóli Íslands.
-
-## English Example
-
-::: {.hi-lead}
-This paragraph uses a small utility class for lead text on public-safe pages.
+::: {.notes}
+- Introduce yourself
+- Overview of the talk
 :::
 
-::: {.hi-highlight}
-Use highlighted blocks for short notices, calls for participation, or links to
-public information.
+## Slide with cards
+
+::: {.fa-card cols=1}
+- lightbulb | **Key point** | supporting detail
+- chart-line | **Another point** | more detail
+- users | **Third point** | and so on
 :::
 
-## Íslenskt Dæmi
+::: {.notes}
+- Notes go here as bullet cues
+:::
 
-Þetta er tilbúið dæmi um almennan veftexta fyrir Quarto-síðu. Efnið inniheldur
-engin persónugögn, námsferla eða rannsóknargögn.
+---
 
-| Section | Status |
-|---|---|
-| Website theme | Initial |
-| Book styling | Planned |
-| RevealJS slides | Initial |
+## Slide with two-column cards
 
-: Synthetic status table
+::: {.fa-card cols=2}
+- circle-check | **First** | left card content
+- circle-xmark | **Second** | right card content
+:::
+
+---
+
+{{< pause 300 >}}
+
+---
+
+## Questions? {.focus-slide}
+
+::: {.two-col}
+::: {}
+<!-- ![](img/photo.jpg){.contact-photo} -->
+:::
+
+::: {}
+{{< contact-card >}}
+:::
+:::

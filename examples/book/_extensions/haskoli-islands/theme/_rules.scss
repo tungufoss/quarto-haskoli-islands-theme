@@ -1,9 +1,10 @@
 :root {
   --hi-blue: #{$hi-blue};
   --hi-dark-blue: #{$hi-dark-blue};
-  --hi-red: #{$hi-red};
+  --hi-accent: #{$hi-accent};
   --hi-yellow: #{$hi-yellow};
   --hi-green: #{$hi-green};
+  --hi-turquoise: #{$hi-turquoise};
   --hi-ink: #{$hi-ink};
   --hi-muted: #{$hi-muted};
   --hi-border: #{$hi-border};
@@ -29,20 +30,20 @@ h3,
 h4,
 h5,
 h6 {
-  color: $hi-dark-blue;
+  color: $hi-ink;
   font-family: $hi-heading-family;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 h1,
 .title {
-  border-bottom: 4px solid $hi-red;
+  border-bottom: 4px solid $hi-accent;
   padding-bottom: 0.35rem;
 }
 
 .navbar,
 .quarto-title-banner {
-  border-bottom: 4px solid $hi-red;
+  border-bottom: 4px solid $hi-accent;
 }
 
 .navbar-title {
@@ -64,7 +65,7 @@ h1,
 }
 
 .hi-highlight {
-  border-left: 0.35rem solid $hi-red;
+  border-left: 0.35rem solid $hi-accent;
   background: $hi-surface;
   padding: 1rem 1.25rem;
 }

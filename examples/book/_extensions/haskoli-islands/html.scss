@@ -1,13 +1,15 @@
 /*-- scss:defaults --*/
-$font-family-sans-serif: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-$headings-font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-$body-color: #15191d;
-$link-color: #005aa0;
-$navbar-bg: #ffffff;
-$navbar-fg: #003b70;
-$navbar-hl: #c43c35;
-$toc-color: #005aa0;
-$code-color: #003b70;
+// Values mirror theme/_tokens.scss so HTML and slides share one look:
+// blue bar (like the slide footer), turquoise accent, dark headings.
+$font-family-sans-serif: "Jost", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$headings-font-family: "Jost", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$body-color: #262626;
+$link-color: #10099F;
+$navbar-bg: #10099F;
+$navbar-fg: #ffffff;
+$navbar-hl: #2DD2C0;
+$toc-color: #10099F;
+$code-color: #10099F;
 
 /*-- scss:rules --*/
 @import "theme/tokens";
@@ -18,7 +20,7 @@ $code-color: #003b70;
 }
 
 .sidebar nav[role="doc-toc"] ul > li > a.active {
-  border-left-color: $hi-red;
+  border-left-color: $hi-accent;
   color: $hi-dark-blue !important;
 }
 

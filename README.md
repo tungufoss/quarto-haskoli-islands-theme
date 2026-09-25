@@ -97,11 +97,71 @@ format:
   haskoli-islands-revealjs: default
 ```
 
-To start from the included document template, use:
+## Start a New Presentation
 
 ```bash
 quarto use template tungufoss/quarto-haskoli-islands-theme
 ```
+
+This installs the extension and copies `template.qmd`, a starter slide deck.
+The slides use the look of the `quarto-hi` / CDIO 2026 decks: turquoise title
+and focus slides, grey content slides with a watermark, and a blue footer bar
+with the logo. The canvas is 1280×720.
+
+```yaml
+pagetitle: "Presentation Title"
+title-theme: "Department / Course"
+subtitle-highlight: "Your Presentation Title"
+subtitle-position: below          # optional: title above the theme line
+presenters:
+  - name: "Your Name"
+    hi-username: "username"       # gives username@hi.is and the staff page link
+    orcid: "0000-0000-0000-0000"
+    github: "yourusername"
+event-meta: "Event Name"
+event-date: today
+watermark: img/hi/hi_logo.svg     # your own copy; embedded in the page
+favicon: img/hi/favicon.svg
+format:
+  haskoli-islands-revealjs:
+    logo: img/hi/hi_named_logo-en.svg
+    footer: "Event Name · Your Name · username@hi.is"
+```
+
+HÍ logos and photos are not bundled (see Design Source). Point `watermark`,
+`favicon` and `logo` at your own copies.
+
+### Slide Features
+
+| Feature | Usage |
+|---|---|
+| Title slide | `{{< hi-title >}}` as the first slide, built from the YAML above |
+| Contact card | `{{< contact-card >}}` lists every presenter, with one shared institution line (`affiliation`, default Háskóli Íslands / University of Iceland, plus `office`, e.g. "VR-II"). Usually on a `## Questions? {.focus-slide}` slide in a `.two-col` layout with a `.contact-photo` image |
+| Break with countdown | `{{< pause 300 >}}` (seconds; rings a bell at zero) |
+| Mentimeter | Set `menti: {url, code, qr, display-url}` (or the flat `menti_url`, `menti_code`, `menti_qr` keys) in YAML, then `## {.focus-slide .menti-login intro="Scan to join"}` for the join slide and `## {data-menti="true"}` for an embedded question |
+| Icon cards | `::: {.fa-card cols=2}` with lines `- icon | **Title** | text` |
+| Layouts and text | `.two-col`, `.img-split`, `.steps`, `.statement`, `.lead`, `.kicker`, `.slide-subtitle`, `.lean-in` and more; see `_extensions/haskoli-islands/revealjs.scss` |
+| Teal slide | `{.focus-slide}` on any slide heading |
+| Icelandic | `lang: is` gives "Pása" and Icelandic dates for `event-date: today` |
+
+### Network Dependencies
+
+The Jost font (Google Fonts) and Font Awesome icons (cdnjs) are loaded from
+the web when a page is viewed. Offline, pages fall back to system sans-serif
+fonts and the icons on title, contact and card slides are missing. For
+offline use, download Jost (SIL Open Font License) and Font Awesome Free and
+replace the links under `include-in-header` in `_extension.yml` with local
+files.
+
+## Updating Existing Projects
+
+```bash
+quarto update extension tungufoss/quarto-haskoli-islands-theme
+```
+
+Commit the updated `_extensions/` folder. Pages, books and slides all read the
+same palette and font from `theme/_tokens.scss`, so one update keeps every
+output in sync.
 
 ## Examples
 

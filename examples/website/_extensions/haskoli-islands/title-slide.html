@@ -3,24 +3,40 @@
 $if(subtitle)$
   <div class="subtitle-highlight">$subtitle$</div>
 $endif$
-$if(presenter.name)$
+$if(presenters)$
   <div class="title-meta">
-    <strong>$presenter.name$</strong>
-$if(presenter.orcid)$
-    <a href="https://orcid.org/$presenter.orcid$" target="_blank" rel="noopener noreferrer" aria-label="ORCID"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a>
+$for(presenters)$
+    <span class="presenter">
+$if(it.web)$
+      <a href="$it.web$" target="_blank" rel="noopener noreferrer"><strong>$it.name$</strong></a>
+$else$
+      <strong>$it.name$</strong>
 $endif$
-$if(presenter.email)$
-    <a href="mailto:$presenter.email$"><i class="fa-solid fa-envelope" aria-hidden="true"></i> $presenter.email$</a>
+$if(it.orcid)$
+      <a href="https://orcid.org/$it.orcid$" target="_blank" rel="noopener noreferrer" aria-label="ORCID"><i class="fa-brands fa-orcid" aria-hidden="true"></i></a>
 $endif$
+$if(it.github)$
+      <a href="https://github.com/$it.github$" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+$endif$
+$if(it.email)$
+      <a href="mailto:$it.email$"><i class="fa-solid fa-envelope" aria-hidden="true"></i> $it.email$</a>
+$endif$
+    </span>
+$endfor$
   </div>
 $else$
-$for(author)$
-  <div class="title-meta"><strong>$author$</strong></div>
-$endfor$
+$if(author)$
+  <div class="title-meta">$for(author)$<strong class="presenter">$author$</strong>$sep$ · $endfor$</div>
+$endif$
 $endif$
 $if(event)$
   <div class="event-meta">$event$$if(date)$: $date$$endif$</div>
 $elseif(date)$
   <div class="event-meta">$date$</div>
+$endif$
+$if(title-slide-notes)$
+  <aside class="notes">
+$title-slide-notes$
+  </aside>
 $endif$
 </section>

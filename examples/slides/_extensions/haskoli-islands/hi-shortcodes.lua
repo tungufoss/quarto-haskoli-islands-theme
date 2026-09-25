@@ -3,7 +3,7 @@
 --
 --   title: / subtitle: / date:
 --   event: "Conference name"
---   presenter:
+--   presenter:            (or `presenters:` with a list of the same fields)
 --     name, position, department, email, phone, office, web, orcid, github
 --
 -- {{< hi-contact >}}          closing slide with contact details (title="..." optional)
@@ -39,11 +39,17 @@ local function bg_attrs(kwargs)
   }
 end
 
-local function presenter(meta)
-  local p = meta["presenter"] or {}
+-- `presenter:` (one person) or `presenters:` (a list)
+local function presenter_list(meta)
+  local list = meta["presenters"]
+  if list ~= nil and pandoc.utils.type(list) == "List" then return list end
+  return { meta["presenter"] or {} }
+end
+
+local function presenter(meta, p)
   local function get(key) return str(p[key]) end
   return {
-    name = get("name") or str(meta["author"]),
+    name = get("name") or (#presenter_list(meta) == 1 and str(meta["author"]) or nil),
     position = get("position"),
     department = get("department"),
     email = get("email"),
@@ -61,10 +67,8 @@ local function link(href, text, icon)
   return '<a href="' .. escape(href) .. '"' .. external .. '>' .. i .. escape(text) .. '</a>'
 end
 
-local function hi_contact(args, kwargs, meta)
-  local p = presenter(meta)
-  local heading = kwarg(kwargs, "title") or (is_icelandic(meta) and "Takk fyrir" or "Thank you")
-
+local function contact_person(meta, entry)
+  local p = presenter(meta, entry)
   local rows = {}
   local function row(html) table.insert(rows, '<div class="contact-row">' .. html .. '</div>') end
   if p.email then row(link("mailto:" .. p.email, p.email, "fa-solid fa-envelope")) end
@@ -80,10 +84,21 @@ local function hi_contact(args, kwargs, meta)
   for _, v in ipairs({ p.position, p.department }) do table.insert(role, v) end
   if #role > 0 then table.insert(who, '<div class="contact-role">' .. escape(table.concat(role, " · ")) .. '</div>') end
 
+  return '<div class="contact-person">' .. table.concat(who) .. table.concat(rows) .. '</div>'
+end
+
+local function hi_contact(args, kwargs, meta)
+  local heading = kwarg(kwargs, "title") or (is_icelandic(meta) and "Takk fyrir" or "Thank you")
+  local people = {}
+  for _, entry in ipairs(presenter_list(meta)) do
+    table.insert(people, contact_person(meta, entry))
+  end
+  local classes = { "contact-slide" }
+  if kwarg(kwargs, "background") then table.insert(classes, "has-photo") end
+
   return pandoc.Blocks {
-    pandoc.Header(2, pandoc.Inlines(heading), pandoc.Attr("contact", { "contact-slide" }, bg_attrs(kwargs))),
-    pandoc.RawBlock("html",
-      '<div class="contact-card">' .. table.concat(who) .. table.concat(rows) .. '</div>'),
+    pandoc.Header(2, pandoc.Inlines(heading), pandoc.Attr("contact", classes, bg_attrs(kwargs))),
+    pandoc.RawBlock("html", '<div class="contact-card">' .. table.concat(people) .. '</div>'),
   }
 end
 

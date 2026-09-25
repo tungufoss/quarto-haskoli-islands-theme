@@ -126,14 +126,19 @@ format: haskoli-islands-revealjs
 
 | Feature | Usage |
 |---|---|
-| Title slide | Automatic from `title`, `subtitle`, `presenter`, `event`, `date`. Add a photo with `title-slide-attributes: {data-background-image: img/photo.jpg, data-background-size: cover}`. |
+| Title slide | Automatic from `title`, `subtitle`, `presenter`, `event`, `date`. Add a photo with `title-slide-attributes: {data-background-image: img/photo.jpg, data-background-size: cover}`. A `::: {.notes}` block before the first slide heading becomes the title slide's speaker notes. |
+| Several presenters | Use `presenters:` with a list of the same fields instead of `presenter:`. The title and contact slides show everyone. |
 | Closing slide with contact details | `{{< hi-contact >}}` (optional `title="Questions?"`, `background="img/photo.jpg"`) |
 | Break with countdown | `{{< pause 300 >}}` (seconds; rings a bell at zero) |
 | Mentimeter | Set `menti: {url, code, qr}` in YAML, then `## {.menti-login intro="Scan to join"}` for the join slide and `## {menti="true"}` for an embedded question |
 | Logo in the side banner | `hi-logo: img/logo.svg` (not bundled; see Design Source) |
-| Icelandic labels | `lang: is` gives "Pása" and "Takk fyrir" |
+| Icelandic labels | `lang: is` gives "Pása" and "Takk fyrir". Also set `date-format: "D. MMMM YYYY"`, since Quarto's `long` format renders Icelandic dates as "2026 M06 10". |
+| Footer | `footer: "..."` is shown small beside the banner and hidden on the title slide. |
 
 The flat `menti_url`, `menti_code` and `menti_qr` keys used by `quarto-hi` also work.
+
+Write `date` as an ISO date (`2026-06-24`) or `today`; free text such as
+"24th June 2026" renders as "Invalid Date".
 
 ## Updating Existing Projects
 

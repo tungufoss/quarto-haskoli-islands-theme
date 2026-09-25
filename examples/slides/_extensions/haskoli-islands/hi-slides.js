@@ -7,10 +7,18 @@
   }
 
   function updateBadge(slide) {
+    var onTitle = !!(slide && slide.classList.contains("hi-title-slide"));
+    document.body.classList.toggle("hi-on-title", onTitle);
     var badge = document.getElementById("hi-badge");
-    if (!badge) return;
-    badge.style.display =
-      slide && slide.classList.contains("hi-title-slide") ? "flex" : "none";
+    if (badge) badge.style.display = onTitle ? "flex" : "none";
+  }
+
+  // The banner is fixed to the viewport; keep it the same width as the
+  // slide padding (--banner-w, in slide units) at the current scale.
+  function updateBannerWidth() {
+    var root = document.documentElement;
+    var width = parseFloat(getComputedStyle(root).getPropertyValue("--banner-w")) || 250;
+    root.style.setProperty("--banner-screen-w", width * Reveal.getScale() + "px");
   }
 
   // ── Countdown ({{< pause seconds >}}) ─────────────────────────────
@@ -95,6 +103,8 @@
     var poll = setInterval(function () {
       if (typeof Reveal !== "undefined" && Reveal.isReady()) {
         clearInterval(poll);
+        updateBannerWidth();
+        Reveal.on("resize", updateBannerWidth);
         if (!isSpeakerContext()) onSlide(Reveal.getCurrentSlide());
         Reveal.on("slidechanged", function (e) {
           if (isSpeakerContext()) updateBadge(null);

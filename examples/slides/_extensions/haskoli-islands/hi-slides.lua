@@ -71,8 +71,32 @@ local function menti_question(h, menti)
   }
 end
 
+-- `presenter:` (one person) and `presenters:` (a list) are both accepted;
+-- the title slide template reads `presenters`.
+local function normalize_presenters(meta)
+  if meta["presenters"] == nil and meta["presenter"] ~= nil then
+    meta["presenters"] = pandoc.MetaList({ meta["presenter"] })
+  end
+end
+
+-- A `::: {.notes}` block before the first slide heading would become an empty
+-- slide; move it onto the generated title slide instead.
+local function move_title_notes(doc)
+  local blocks = doc.blocks
+  for i, block in ipairs(blocks) do
+    if block.t == "Header" then return end
+    if block.t == "Div" and block.classes:includes("notes") then
+      doc.meta["title-slide-notes"] = pandoc.MetaBlocks(block.content)
+      blocks:remove(i)
+      return
+    end
+  end
+end
+
 function Pandoc(doc)
   if not quarto.doc.is_format("revealjs") then return nil end
+  normalize_presenters(doc.meta)
+  move_title_notes(doc)
 
   quarto.doc.add_html_dependency({
     name = "haskoli-islands-slides",

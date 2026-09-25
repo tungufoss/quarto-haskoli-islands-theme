@@ -15,23 +15,12 @@ $code-block-font-size: 0.78em;
 @import "theme/tokens";
 @import "theme/rules";
 
+// --banner-w is in slide units (the 1600x900 canvas) and drives slide padding.
+// The banner itself is fixed to the viewport, so hi-slides.js sets
+// --banner-screen-w = --banner-w x Reveal's current scale on every resize.
 :root {
   --banner-w: 250px;
-}
-
-// Scale the side banner down in smaller viewports (e.g. presenter panes).
-@media (max-width: 1500px) {
-  :root { --banner-w: 170px; }
-}
-
-@media (max-width: 1100px) {
-  :root { --banner-w: 120px; }
-  .reveal .slide { padding: 32px 48px 32px calc(var(--banner-w) + 26px); }
-}
-
-@media (max-width: 800px) {
-  :root { --banner-w: 92px; }
-  .reveal .slide { padding: 24px 32px 24px calc(var(--banner-w) + 18px); }
+  --banner-screen-w: 250px;
 }
 
 .reveal .slides {
@@ -43,7 +32,9 @@ $code-block-font-size: 0.78em;
   box-sizing: border-box;
 }
 
-.reveal .slide {
+// Scoped to the slide sections: Reveal copies slide classes onto the
+// background layer, so a bare `.slide` rule would also pad background images.
+.reveal .slides section.slide {
   padding: 42px 68px 42px calc(var(--banner-w) + 40px);
 }
 
@@ -52,7 +43,7 @@ $code-block-font-size: 0.78em;
 .reveal .slide-number { color: $hi-blue; }
 .reveal a:hover { color: $hi-accent; }
 
-// ── Branding overlay (injected by hi-branding.lua) ──────────────────
+// ── Branding overlay (injected by hi-slides.lua) ──────────────────
 
 #hi-banner {
   align-items: flex-start;
@@ -65,15 +56,15 @@ $code-block-font-size: 0.78em;
   pointer-events: none;
   position: fixed;
   top: 0;
-  width: var(--banner-w);
+  width: var(--banner-screen-w);
   z-index: 100;
 }
 
 #hi-logo {
   display: block;
-  height: var(--banner-w);
+  height: var(--banner-screen-w);
   object-fit: contain;
-  width: var(--banner-w);
+  width: var(--banner-screen-w);
 }
 
 // "HÍ" badge shown next to the banner on the title slide
@@ -83,17 +74,28 @@ $code-block-font-size: 0.78em;
   color: $hi-white;
   display: none;
   font-family: $hi-font-family;
-  font-size: calc(var(--banner-w) * 0.62);
+  font-size: calc(var(--banner-screen-w) * 0.62);
   font-weight: 700;
-  height: var(--banner-w);
+  height: var(--banner-screen-w);
   justify-content: center;
-  left: var(--banner-w);
+  left: var(--banner-screen-w);
   letter-spacing: -0.02em;
   pointer-events: none;
   position: fixed;
   top: 0;
-  width: var(--banner-w);
+  width: var(--banner-screen-w);
   z-index: 100;
+}
+
+// Footer: small and out of the banner's way; hidden on the title slide
+.reveal .footer {
+  font-size: 0.45em;
+  left: var(--banner-screen-w);
+}
+
+// Quarto sets the footer's display inline, hence !important
+body.hi-on-title .reveal .footer {
+  display: none !important;
 }
 
 // ── Typography ──────────────────────────────────────────────────────
@@ -141,8 +143,9 @@ $code-block-font-size: 0.78em;
 
 // Title slide (title-slide.html): background from title-slide-attributes,
 // text boxes offset past the banner
-.reveal .hi-title-slide {
+.reveal section#title-slide.hi-title-slide {
   padding: 0;
+  text-align: left;
 }
 
 .title-highlight,
@@ -190,6 +193,10 @@ $code-block-font-size: 0.78em;
   margin-right: 0.4em;
 }
 
+.title-meta .presenter + .presenter {
+  margin-left: 1em;
+}
+
 .title-meta a i {
   margin-right: 0.2em;
 }
@@ -205,12 +212,21 @@ $code-block-font-size: 0.78em;
 
 // ── Components ──────────────────────────────────────────────────────
 
-.reveal .callout {
+// Quarto styles callouts with `.reveal div.callout.callout-style-*`, so match
+// that specificity to take effect.
+.reveal .slides div.callout,
+.reveal .slides div.callout.callout-style-simple,
+.reveal .slides div.callout.callout-style-default {
   background: $hi-surface;
+  border: 0;
   border-left: 8px solid $hi-accent;
+  border-radius: 0;
   font-size: 0.9em;
   margin: 0.9em 0;
-  padding: 0.7em 0.9em;
+}
+
+.reveal .slides div.callout.callout-style-default div.callout-title {
+  background: transparent;
 }
 
 .big-number {
@@ -236,6 +252,20 @@ $code-block-font-size: 0.78em;
   border-left: 8px solid $hi-accent;
   margin-top: 0.8em;
   padding: 0.2em 0 0.2em 0.9em;
+}
+
+.contact-person + .contact-person {
+  margin-top: 0.8em;
+}
+
+// Keep the heading and card readable over a background photo
+.contact-slide.has-photo {
+  h2, .contact-card {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 0.2em 0.5em;
+  }
+
+  .contact-card { padding: 0.5em 0.9em; width: fit-content; }
 }
 
 .contact-name {
@@ -356,7 +386,7 @@ $code-block-font-size: 0.78em;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  left: 24px;
+  left: calc(var(--banner-w) + 24px);
   padding: 24px;
   pointer-events: none;
   position: absolute;

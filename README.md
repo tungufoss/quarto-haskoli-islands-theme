@@ -144,6 +144,15 @@ HÍ logos and photos are not bundled (see Design Source). Point `watermark`,
 | Teal slide | `{.focus-slide}` on any slide heading |
 | Icelandic | `lang: is` gives "Pása" and Icelandic dates for `event-date: today` |
 
+### Network Dependencies
+
+The Jost font (Google Fonts) and Font Awesome icons (cdnjs) are loaded from
+the web when a page is viewed. Offline, pages fall back to system sans-serif
+fonts and the icons on title, contact and card slides are missing. For
+offline use, download Jost (SIL Open Font License) and Font Awesome Free and
+replace the links under `include-in-header` in `_extension.yml` with local
+files.
+
 ## Updating Existing Projects
 
 ```bash
